@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--<ListView-->
+    <!--android:id="@+id/chat"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="1"></ListView>-->
+    <TextView
+        android:id="@+id/chat_room_id"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/register_edit_bound"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/chat_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:singleLine="false"
+        android:background="@color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/register_edit_bound"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/chat_input"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@null" />
+
+        <Button
+            android:id="@+id/chat_send"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/login_text_not_click_fill"
+            android:gravity="center"
+            android:text="发送"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</LinearLayout>
