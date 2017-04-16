@@ -1,0 +1,14 @@
+<scheme name="Default copy" version="142" parent_scheme="Default">
+  <option name="LINE_SPACING" value="1.0" />
+  <option name="EDITOR_FONT_SIZE" value="14" />
+  <option name="CONSOLE_FONT_NAME" value="Courier New" />
+  <option name="EDITOR_FONT_NAME" value="Consolas" />
+  <attributes>
+    <option name="TEXT">
+      <value>
+        <option name="FOREGROUND" value="0" />
+        <option name="BACKGROUND" value="c7edcc" />
+      </value>
+    </option>
+  </attributes>
+</scheme>
