@@ -4,11 +4,12 @@ package com.dai.util;
  * Created by Administrator on 2017/4/16 0016.
  */
 
-public class ChatData {
+class ChatData {
+
     private String text;
     private Byte abyte;
 
-    public Byte getAbyte() {
+    Byte getAbyte() {
         return abyte;
     }
 
