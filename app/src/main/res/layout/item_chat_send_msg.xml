@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/item_chat_send_time"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:gravity="center"
+        android:text="20:30" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp">
+
+
+        <LinearLayout
+            android:id="@+id/item_linear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/item_chat_send_headIcon"
+            android:layout_toStartOf="@+id/item_chat_send_headIcon"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/item_chat_send_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text=" 小明"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/item_chat_send_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/chat_send_msg"
+                android:gravity="center_vertical"
+                android:text="ceshi neirongda  ljfkd das;ldkjlfdsafasfasdfasfasdfasdf kjdf;als dddas;ldkfdsadfsadfsadfasdjf fdsadfsafasfsadfasfsadfasfas;lkjdf;a lsdkdjfa" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/item_chat_send_headIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="@mipmap/ic_launcher" />
+    </RelativeLayout>
+</LinearLayout>

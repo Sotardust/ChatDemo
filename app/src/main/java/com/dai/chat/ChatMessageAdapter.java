@@ -48,17 +48,39 @@ public class ChatMessageAdapter extends BaseAdapter {
         if (convertView == null) {
             vh = new ViewHolder();
             if (message.isComing()) {
-                convertView = inflater.inflate(R.layout.item_chat_from_msg,parent,false);
-
+                convertView = inflater.inflate(R.layout.item_chat_from_msg, parent, false);
+                vh.headIcon = (ImageView) convertView.findViewById(R.id.item_chat_from_headIcon);
+                vh.name = (TextView) convertView.findViewById(R.id.item_chat_from_name);
+                vh.message = (TextView) convertView.findViewById(R.id.item_chat_from_message);
+                vh.time = (TextView) convertView.findViewById(R.id.item_chat_from_time);
+            } else {
+                convertView = inflater.inflate(R.layout.item_chat_send_msg, parent, false);
+                vh.headIcon = (ImageView) convertView.findViewById(R.id.item_chat_send_headIcon);
+                vh.name = (TextView) convertView.findViewById(R.id.item_chat_send_name);
+                vh.message = (TextView) convertView.findViewById(R.id.item_chat_send_message);
+                vh.time = (TextView) convertView.findViewById(R.id.item_chat_send_time);
             }
+            convertView.setTag(vh);
+        } else {
+            vh = (ViewHolder) convertView.getTag();
         }
+        vh.headIcon.setBackgroundResource(message.getHeadIcon());
+        vh.name.setText(message.getName());
+        vh.message.setText(message.getMessage());
+        vh.time.setText(message.getDate());
+
         return convertView;
     }
 
-    class ViewHolder {
-        TextView time;
+    private class ViewHolder {
+        ImageView headIcon;
         TextView name;
         TextView message;
-        ImageView headIcon;
+        TextView time;
+    }
+
+    public void setMessages(Message message) {
+        this.messages.add(message);
+        notifyDataSetChanged();
     }
 }

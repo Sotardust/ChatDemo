@@ -1,5 +1,6 @@
 package com.dai.bean;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -14,8 +15,9 @@ public class Message {
     private boolean isComing;
     private int headIcon;
 
-    public Date getDate() {
-        return date;
+    public String getDate() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
+        return simpleDateFormat.format(date);
     }
 
     public void setDate(Date date) {

@@ -4,30 +4,25 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--<ListView-->
-    <!--android:id="@+id/chat"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="0dp"-->
-    <!--android:layout_weight="1"></ListView>-->
     <TextView
         android:id="@+id/chat_room_id"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:background="@drawable/register_edit_bound"
+        android:background="@drawable/chat_room_title_bround"
         android:gravity="center" />
 
-    <TextView
-        android:id="@+id/chat_content"
-        android:layout_width="match_parent"
+    <ListView
+        android:id="@+id/chat_list"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:singleLine="false"
-        android:background="@color/white" />
+        android:divider="@null"
+        android:dividerHeight="10dp"></ListView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@drawable/register_edit_bound"
+        android:background="@drawable/chat_room_title_bround"
         android:orientation="horizontal">
 
         <EditText

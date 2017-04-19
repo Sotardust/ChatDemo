@@ -7,10 +7,12 @@ import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.dai.BaseActivity;
 import com.dai.R;
+import com.dai.bean.Message;
 import com.dai.login.RegisterActivity;
 import com.dai.util.ChatDataObserver;
 import com.dai.util.SimpleTextWatcher;
@@ -18,6 +20,7 @@ import com.dai.util.SimpleTextWatcher;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -35,14 +38,12 @@ public class ChatActivity extends BaseActivity implements ChatDataObserver {
         Intent intent = getIntent();
         String roomId = intent.getStringExtra("roomId");
         String content = intent.getStringExtra("content");
-//        ListView listView = (ListView) findViewById(R.id.chat);
+        ListView listView = (ListView) findViewById(R.id.chat_list);
         TextView room = (TextView) findViewById(R.id.chat_room_id);
-        chatContent = (TextView) findViewById(R.id.chat_content);
         final EditText input = (EditText) findViewById(R.id.chat_input);
         final Button send = (Button) findViewById(R.id.chat_send);
 
         room.setText(roomId);
-        chatContent.setText(content);
         input.addTextChangedListener(new SimpleTextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
@@ -50,25 +51,44 @@ public class ChatActivity extends BaseActivity implements ChatDataObserver {
                 RegisterActivity.setButtonColor(s.toString(), send);
             }
         });
-
+        ArrayList<Message> messages = new ArrayList<>();
+        final ChatMessageAdapter messageAdapter = new ChatMessageAdapter(getApplicationContext(), messages);
+        listView.setAdapter(messageAdapter);
 
         send.setOnClickListener(new View.OnClickListener() {
+            int position = 0;
+
             @Override
             public void onClick(View v) {
-                JSONObject jsonObject = new JSONObject();
-                try {
-                    Date date = new Date();
-                    long clientTime = date.getTime();
-                    jsonObject.put("cmd", "room.chat");
-                    jsonObject.put("roomid", "original");
-                    jsonObject.put("msg", input.getText().toString());
-                    jsonObject.put("post", "1");
-                    jsonObject.put("ctime", String.valueOf(clientTime));
-                    System.out.println("clientTime = " + clientTime);
-                    getChatWebSocketListener().sendMessage(jsonObject.toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                Message message = new Message();
+                message.setHeadIcon(R.mipmap.ic_launcher);
+                if (position % 2 != 0) {
+                    message.setComing(false);
+                    message.setName("小明");
+                } else {
+                    message.setName("小明" + position % 2);
+                    message.setComing(true);
                 }
+                Date date = new Date();
+                message.setDate(date);
+                message.setMessage(input.getText().toString());
+                messageAdapter.setMessages(message);
+                position++;
+
+//                JSONObject jsonObject = new JSONObject();
+//                try {
+//                    Date date = new Date();
+//                    long clientTime = date.getTime();
+//                    jsonObject.put("cmd", "room.chat");
+//                    jsonObject.put("roomid", "original");
+//                    jsonObject.put("msg", input.getText().toString());
+//                    jsonObject.put("post", "1");
+//                    jsonObject.put("ctime", String.valueOf(clientTime));
+//                    System.out.println("clientTime = " + clientTime);
+//                    getChatWebSocketListener().sendMessage(jsonObject.toString());
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
             }
         });
     }

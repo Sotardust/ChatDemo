@@ -1,6 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="15dp"
+    android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/item_chat_from_time"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:gravity="center"
+        android:text="20:30" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="60dp">
+
+        <ImageView
+            android:id="@+id/item_chat_from_headIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/ic_launcher" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/item_chat_from_headIcon"
+            android:layout_toRightOf="@id/item_chat_from_headIcon"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/item_chat_from_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 小明" />
+
+            <TextView
+                android:id="@+id/item_chat_from_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:background="@drawable/chat_from_msg"
+                android:text="ceshi neirongdaljfkddas;ldkjlkjdf;alsdddas;ldkjfas;lkjdf;alsdkdjfa" />
+        </LinearLayout>
+
+    </RelativeLayout>
 </LinearLayout>
