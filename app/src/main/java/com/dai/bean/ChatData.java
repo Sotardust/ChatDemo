@@ -1,4 +1,4 @@
-package com.dai.util;
+package com.dai.bean;
 
 /**
  * Created by Administrator on 2017/4/16 0016.
@@ -9,7 +9,7 @@ class ChatData {
     private String text;
     private Byte abyte;
 
-    Byte getAbyte() {
+    public Byte getAbyte() {
         return abyte;
     }
 

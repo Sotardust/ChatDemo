@@ -93,7 +93,11 @@ public class LoginActivity extends BaseActivity implements ChatDataObserver {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pullData(username.getText().toString(), password.getText().toString());
+
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                finish();
+//                pullData(username.getText().toString(), password.getText().toString());
             }
         });
         forget.setOnClickListener(new View.OnClickListener() {

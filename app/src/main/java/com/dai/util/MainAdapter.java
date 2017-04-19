@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dai.R;
+import com.dai.bean.ChatMessage;
 import com.dai.chat.ChatActivity;
 
 import java.util.ArrayList;
@@ -20,30 +21,23 @@ import java.util.ArrayList;
 
 public class MainAdapter extends BaseAdapter {
     private Context context;
-    private ArrayList<String> ids;
-    private ArrayList<String> content;
-    private ArrayList<String> times;
-    private ArrayList<Integer> numbers;
+    private ArrayList<ChatMessage> chatMessages;
     private LayoutInflater inflater;
 
-    public MainAdapter(Context context, ArrayList<String> ids, ArrayList<String> content,
-                       ArrayList<String> times, ArrayList<Integer> numbers) {
+    public MainAdapter(Context context, ArrayList<ChatMessage> chatMessages) {
         this.context = context;
         inflater = LayoutInflater.from(context);
-        this.ids = ids;
-        this.content = content;
-        this.times = times;
-        this.numbers = numbers;
+        this.chatMessages = chatMessages;
     }
 
     @Override
     public int getCount() {
-        return content.size();
+        return chatMessages.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return content.get(position);
+        return chatMessages.get(position);
     }
 
     @Override
@@ -66,14 +60,14 @@ public class MainAdapter extends BaseAdapter {
         } else {
             vh = (ViewHolder) convertView.getTag();
         }
-        vh.id.setText(ids.get(position));
-        vh.content.setText(content.get(position));
-        vh.time.setText(times.get(position));
-        vh.number.setText(String.valueOf(numbers.get(position)));
+        vh.id.setText(chatMessages.get(position).getRoomId());
+        vh.content.setText(chatMessages.get(position).getContent());
+        vh.time.setText(chatMessages.get(position).getTimeStamp());
+        vh.number.setText(String.valueOf(chatMessages.get(position)));
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewWorkflowDetail(ids.get(position), content.get(position));
+                viewWorkflowDetail(chatMessages.get(position).getRoomId(), chatMessages.get(position).getContent());
             }
         });
         return convertView;
@@ -91,7 +85,9 @@ public class MainAdapter extends BaseAdapter {
         Intent intent = new Intent(context, ChatActivity.class);
         intent.putExtra("roomId", roomId);
         intent.putExtra("content", content);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
+
     }
 
 }

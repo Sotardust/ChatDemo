@@ -2,7 +2,7 @@ package com.dai.util;
 
 import android.app.Activity;
 
-import org.json.JSONObject;
+import com.dai.bean.ChatData;
 
 import okhttp3.Response;
 import okhttp3.WebSocket;
@@ -17,9 +17,6 @@ public class ChatWebSocketListener extends WebSocketListener {
 
     private static Activity mActivity;
     private static WebSocket mWebSocket;
-    private JSONObject mJSONObject;
-
-    private static ChatWebSocketListener chatWebSocketListener;
 
 
     public ChatWebSocketListener(Activity activity) {
@@ -73,7 +70,6 @@ public class ChatWebSocketListener extends WebSocketListener {
     }
 
     public void closeWebSocket() {
-        chatWebSocketListener = null;
         mWebSocket.close(1000, "主动关闭");
     }
 

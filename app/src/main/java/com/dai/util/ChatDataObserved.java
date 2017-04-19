@@ -1,5 +1,7 @@
 package com.dai.util;
 
+import com.dai.bean.ChatData;
+
 import java.util.ArrayList;
 import java.util.List;
 

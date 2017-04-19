@@ -124,8 +124,7 @@ public class RegisterActivity2 extends BaseActivity {
 //                System.out.println("jsonObject = " + jsonObject);
 //                RequestBody requestBody = RequestBody.create(JSON, jsonObject.toString());
 
-                Request request = new Request.Builder()
-                        .url(url)
+                Request request = BaseActivity.getRequest(url)
                         .post(requestBody)
                         .build();
                 Response response = okhttpClient.newCall(request).execute();
