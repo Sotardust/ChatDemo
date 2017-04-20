@@ -17,14 +17,25 @@ import com.dai.MainActivity;
 import com.dai.R;
 import com.dai.util.ChatDataObserver;
 import com.dai.util.SimpleTextWatcher;
+import com.dai.util.Url;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Date;
 
+import io.reactivex.Single;
+import io.reactivex.SingleEmitter;
+import io.reactivex.SingleObserver;
+import io.reactivex.SingleOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
 
@@ -94,9 +105,7 @@ public class LoginActivity extends BaseActivity implements ChatDataObserver {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                finish();
+                login(username.getText().toString(), password.getText().toString());
 //                pullData(username.getText().toString(), password.getText().toString());
             }
         });
@@ -107,6 +116,65 @@ public class LoginActivity extends BaseActivity implements ChatDataObserver {
                 startActivity(intent);
             }
         });
+
+
+    }
+
+
+    private void login(final String username, final String password) {
+        Single.create(new SingleOnSubscribe<String>() {
+            @Override
+            public void subscribe(SingleEmitter<String> e) throws Exception {
+                OkHttpClient okHttpClient = new OkHttpClient();
+                String url = Url.getLoginUrl();
+                RequestBody requestBody = new FormBody.Builder()
+                        .add("username", username)
+                        .add("password", password)
+                        .build();
+                Request request =BaseActivity.getRequest(url)
+                        .post(requestBody)
+                        .build();
+                Response response = okHttpClient.newCall(request).execute();
+                System.out.println("response.code() = " + response.code());
+                String content = response.body().string();
+                System.out.println("content = " + content);
+                e.onSuccess(content);
+
+
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(String value) {
+                        System.out.println("value = " + value);
+                        JSONObject jsonObject = null;
+                        try {
+                            jsonObject = new JSONObject(value);
+                            int success = jsonObject.getInt("success");
+                            String error = jsonObject.getString("error");
+                            if (success == 1) {
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
 
 
     }

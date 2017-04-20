@@ -29,7 +29,7 @@ import io.reactivex.SingleOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.FormBody;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -105,24 +105,24 @@ public class RegisterActivity2 extends BaseActivity {
                 System.out.println("date.getTime() = " + String.valueOf(date.getTime()).substring(0, 10));
                 String sign = "{^_^}..(^~^)" + username + password + time + "6666";
 
-                RequestBody requestBody = new FormBody.Builder()
-                        .add("appid", "6666")
-                        .add("uid", username)
-                        .add("psw", password)
-                        .add("tag", "18222171946")
-                        .add("time", time)
-                        .add("sign", textEncryption(sign))
-                        .build();
+//                RequestBody requestBody = new FormBody.Builder()
+//                        .add("appid", "6666")
+//                        .add("uid", username)
+//                        .add("psw", password)
+//                        .add("tag", "18222171946")
+//                        .add("time", time)
+//                        .add("sign", textEncryption(sign))
+//                        .build();
 
                 // 47.93.47.203 注册
-//                MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-//                JSONObject jsonObject = new JSONObject();
-//                jsonObject.put("username", username);
-//                jsonObject.put("password", password);
-//                jsonObject.put("email", "958471598@qq.com");
-//                jsonObject.put("number", "18222171946");
-//                System.out.println("jsonObject = " + jsonObject);
-//                RequestBody requestBody = RequestBody.create(JSON, jsonObject.toString());
+                MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("username", username);
+                jsonObject.put("password", password);
+                jsonObject.put("email", "958471598@qq.com");
+                jsonObject.put("number", "18222171946");
+                System.out.println("jsonObject = " + jsonObject);
+                RequestBody requestBody = RequestBody.create(JSON, jsonObject.toString());
 
                 Request request = BaseActivity.getRequest(url)
                         .post(requestBody)
