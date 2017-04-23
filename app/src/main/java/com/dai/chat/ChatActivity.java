@@ -29,7 +29,10 @@ import java.util.Date;
 
 public class ChatActivity extends BaseActivity implements ChatDataObserver {
 
-    TextView chatContent;
+    private ChatMessageAdapter messageAdapter;
+    private ListView listView;
+    private EditText input;
+    private int number = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,9 +41,9 @@ public class ChatActivity extends BaseActivity implements ChatDataObserver {
         Intent intent = getIntent();
         String roomId = intent.getStringExtra("roomId");
         String content = intent.getStringExtra("content");
-        ListView listView = (ListView) findViewById(R.id.chat_list);
+        listView = (ListView) findViewById(R.id.chat_list);
         TextView room = (TextView) findViewById(R.id.chat_room_id);
-        final EditText input = (EditText) findViewById(R.id.chat_input);
+        input = (EditText) findViewById(R.id.chat_input);
         final Button send = (Button) findViewById(R.id.chat_send);
 
         room.setText(roomId);
@@ -52,43 +55,40 @@ public class ChatActivity extends BaseActivity implements ChatDataObserver {
             }
         });
         ArrayList<Message> messages = new ArrayList<>();
-        final ChatMessageAdapter messageAdapter = new ChatMessageAdapter(getApplicationContext(), messages);
+        messageAdapter = new ChatMessageAdapter(getApplicationContext(), messages);
         listView.setAdapter(messageAdapter);
 
         send.setOnClickListener(new View.OnClickListener() {
-            int position = 0;
 
             @Override
             public void onClick(View v) {
                 Message message = new Message();
                 message.setHeadIcon(R.mipmap.ic_launcher);
-                if (position % 2 != 0) {
-                    message.setComing(false);
-                    message.setName("小明");
-                } else {
-                    message.setName("小明" + position % 2);
-                    message.setComing(true);
-                }
+//                if (position % 2 != 0) {
+                message.setComing(false);
+                message.setName("小明");
+//                } else {
+//                    message.setName("小明" + position % 2);
+//                    message.setComing(true);
+//                }
                 Date date = new Date();
                 message.setDate(date);
                 message.setMessage(input.getText().toString());
                 messageAdapter.setMessages(message);
-                position++;
 
-//                JSONObject jsonObject = new JSONObject();
-//                try {
-//                    Date date = new Date();
-//                    long clientTime = date.getTime();
-//                    jsonObject.put("cmd", "room.chat");
-//                    jsonObject.put("roomid", "original");
-//                    jsonObject.put("msg", input.getText().toString());
-//                    jsonObject.put("post", "1");
-//                    jsonObject.put("ctime", String.valueOf(clientTime));
-//                    System.out.println("clientTime = " + clientTime);
-//                    getChatWebSocketListener().sendMessage(jsonObject.toString());
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    long clientTime = date.getTime();
+                    jsonObject.put("cmd", "room.chat");
+                    jsonObject.put("roomid", "original");
+                    jsonObject.put("msg", input.getText().toString());
+                    jsonObject.put("post", "1");
+                    jsonObject.put("ctime", String.valueOf(clientTime));
+                    System.out.println("clientTime = " + clientTime);
+                    getChatWebSocketListener().sendMessage(jsonObject.toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -103,12 +103,21 @@ public class ChatActivity extends BaseActivity implements ChatDataObserver {
             final String msg = jsonObject.getString("msg");
             String time = jsonObject.getString("time");
             String uid = jsonObject.getString("uid");
-            this.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    chatContent.setText(msg);
-                }
-            });
+
+            Message message = new Message();
+            message.setHeadIcon(R.mipmap.ic_launcher);
+            if (number % 2 == 0) {
+                message.setComing(false);
+            } else {
+                message.setComing(true);
+            }
+            message.setName("小王");
+            Date date = new Date();
+            message.setDate(date);
+            message.setMessage(msg);
+            messageAdapter.setMessages(message);
+            number++;
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

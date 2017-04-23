@@ -116,10 +116,7 @@ public class LoginActivity extends BaseActivity implements ChatDataObserver {
                 startActivity(intent);
             }
         });
-
-
     }
-
 
     private void login(final String username, final String password) {
         Single.create(new SingleOnSubscribe<String>() {
@@ -131,7 +128,7 @@ public class LoginActivity extends BaseActivity implements ChatDataObserver {
                         .add("username", username)
                         .add("password", password)
                         .build();
-                Request request =BaseActivity.getRequest(url)
+                Request request = BaseActivity.getRequest(url)
                         .post(requestBody)
                         .build();
                 Response response = okHttpClient.newCall(request).execute();
@@ -139,26 +136,23 @@ public class LoginActivity extends BaseActivity implements ChatDataObserver {
                 String content = response.body().string();
                 System.out.println("content = " + content);
                 e.onSuccess(content);
-
-
             }
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<String>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-
                     }
 
                     @Override
                     public void onSuccess(String value) {
                         System.out.println("value = " + value);
-                        JSONObject jsonObject = null;
                         try {
-                            jsonObject = new JSONObject(value);
+                            JSONObject jsonObject = new JSONObject(value);
                             int success = jsonObject.getInt("success");
                             String error = jsonObject.getString("error");
                             if (success == 1) {
+                                pullDataJava();
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
                                 finish();
@@ -196,6 +190,15 @@ public class LoginActivity extends BaseActivity implements ChatDataObserver {
         }
     }
 
+    private void pullDataJava() {
+        String url = "ws://10.0.3.2:8080/websocket";
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        webSocket = okHttpClient.newWebSocket(request, getChatWebSocketListener());
+    }
+
     private void pullData(final String username, final String password) {
         String url = "ws://8.34.216.83:8080";
         OkHttpClient okHttpClient = new OkHttpClient();
@@ -212,7 +215,6 @@ public class LoginActivity extends BaseActivity implements ChatDataObserver {
                 .header("Sign", sign)
                 .url(url)
                 .build();
-
         webSocket = okHttpClient.newWebSocket(request, getChatWebSocketListener());
     }
 

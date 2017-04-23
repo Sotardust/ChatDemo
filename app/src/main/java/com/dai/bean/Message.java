@@ -13,6 +13,7 @@ public class Message {
     private String name;
     private String message;
     private boolean isComing;
+
     private int headIcon;
 
     public String getDate() {

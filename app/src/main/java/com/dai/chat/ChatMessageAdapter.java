@@ -19,7 +19,7 @@ import java.util.List;
 
 public class ChatMessageAdapter extends BaseAdapter {
     private LayoutInflater inflater;
-    private List<Message> messages;
+    private static List<Message> messages;
 
     public ChatMessageAdapter(Context context, List<Message> messages) {
         inflater = LayoutInflater.from(context);
