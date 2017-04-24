@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import com.dai.bean.ChatMessage;
-import com.dai.bean.ReceivedMessage;
+import com.dai.bean.ReceivedMessage2;
 import com.dai.login.LoginActivity;
 import com.dai.util.ChatDataObserver;
 import com.dai.util.MainAdapter;
@@ -43,7 +43,7 @@ public class MainActivity2 extends BaseActivity implements ChatDataObserver {
         System.out.println("MainActivity2.onTextMessage");
         System.out.println("string = " + string);
         Gson gson = new Gson();
-        ReceivedMessage receivedMessage = gson.fromJson(string, ReceivedMessage.class);
+        ReceivedMessage2 receivedMessage = gson.fromJson(string, ReceivedMessage2.class);
         for (ChatMessage chatMessage : chatMessages) {
             if (chatMessage.getRoomId().equals(receivedMessage.getRoomId())) {
                 return;

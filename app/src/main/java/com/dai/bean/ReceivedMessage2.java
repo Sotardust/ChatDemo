@@ -6,7 +6,7 @@ import com.google.gson.Gson;
  * Created by dai on 2017/4/24.
  */
 
-public class SendMessage {
+public class ReceivedMessage2 {
 
     private String roomId;   //房间Id
     private String userId;   //用户Id(username)
@@ -29,8 +29,8 @@ public class SendMessage {
         this.userId = userId;
     }
 
-    public String getTimeStamp() {
-        return String.valueOf(timeStamp);
+    public long getTimeStamp() {
+        return timeStamp;
     }
 
     public void setTimeStamp(long timeStamp) {
@@ -48,12 +48,12 @@ public class SendMessage {
     @Override
     public String toString() {
         Gson gson = new Gson();
-        SendMessage sendMessage = new SendMessage();
+        ReceivedMessage2 sendMessage = new ReceivedMessage2();
         sendMessage.setMessage(message);
         sendMessage.setTimeStamp(timeStamp);
         sendMessage.setRoomId(roomId);
         sendMessage.setUserId(userId);
-        System.out.println("gson.toJson(sendMessage, SendMessage.class) = " + gson.toJson(sendMessage, SendMessage.class));
-        return gson.toJson(sendMessage, SendMessage.class);
+        System.out.println("gson.toJson(sendMessage, SendMessage.class) = " + gson.toJson(sendMessage, ReceivedMessage2.class));
+        return gson.toJson(sendMessage, ReceivedMessage2.class);
     }
 }

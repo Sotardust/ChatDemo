@@ -13,8 +13,8 @@ import android.widget.TextView;
 import com.dai.BaseActivity;
 import com.dai.R;
 import com.dai.bean.Message;
-import com.dai.bean.ReceivedMessage;
-import com.dai.bean.SendMessage;
+import com.dai.bean.ReceivedMessage2;
+import com.dai.bean.SendMessage2;
 import com.dai.login.RegisterActivity;
 import com.dai.util.ChatDataObserver;
 import com.dai.util.SimpleTextWatcher;
@@ -71,7 +71,7 @@ public class ChatActivity2 extends BaseActivity implements ChatDataObserver {
                 message.setMessage(input.getText().toString());
                 messageAdapter.setMessages(message);
 
-                SendMessage sendMessage = new SendMessage();
+                SendMessage2 sendMessage = new SendMessage2();
                 long clientTime = date.getTime();
                 sendMessage.setRoomId("6666");
                 sendMessage.setUserId("xiaoming");
@@ -85,7 +85,7 @@ public class ChatActivity2 extends BaseActivity implements ChatDataObserver {
     @Override
     public void onTextMessage(String string) {
         Gson gson = new Gson();
-        ReceivedMessage receivedMessage = gson.fromJson(string, ReceivedMessage.class);
+        ReceivedMessage2 receivedMessage = gson.fromJson(string, ReceivedMessage2.class);
         Message message = new Message();
         message.setHeadIcon(R.mipmap.ic_launcher);
         if (number % 2 == 0) {
