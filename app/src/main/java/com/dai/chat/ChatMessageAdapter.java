@@ -19,9 +19,9 @@ import java.util.List;
 
 public class ChatMessageAdapter extends BaseAdapter {
     private LayoutInflater inflater;
-    private static List<Message> messages;
+    private List<Message> messages;
 
-    public ChatMessageAdapter(Context context, List<Message> messages) {
+    ChatMessageAdapter(Context context, List<Message> messages) {
         inflater = LayoutInflater.from(context);
         this.messages = messages;
     }
@@ -79,8 +79,8 @@ public class ChatMessageAdapter extends BaseAdapter {
         TextView time;
     }
 
-    public void setMessages(Message message) {
-        this.messages.add(message);
+    void setMessages(List<Message> messages) {
+        this.messages = messages;
         notifyDataSetChanged();
     }
 }

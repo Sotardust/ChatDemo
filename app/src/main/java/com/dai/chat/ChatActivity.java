@@ -74,7 +74,7 @@ public class ChatActivity extends BaseActivity implements ChatDataObserver {
                 Date date = new Date();
                 message.setDate(date);
                 message.setMessage(input.getText().toString());
-                messageAdapter.setMessages(message);
+//                messageAdapter.setMessages(message);
 
                 JSONObject jsonObject = new JSONObject();
                 try {
@@ -115,7 +115,7 @@ public class ChatActivity extends BaseActivity implements ChatDataObserver {
             Date date = new Date();
             message.setDate(date);
             message.setMessage(msg);
-            messageAdapter.setMessages(message);
+//            messageAdapter.setMessages(message);
             number++;
 
         } catch (JSONException e) {
