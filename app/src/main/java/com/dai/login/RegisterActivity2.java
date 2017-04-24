@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.dai.BaseActivity;
 import com.dai.R;
-import com.dai.util.Url;
+import com.dai.util.URLS2;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -97,7 +97,7 @@ public class RegisterActivity2 extends BaseActivity {
             public void subscribe(SingleEmitter<String> emitter) throws Exception {
 
                 OkHttpClient okhttpClient = new OkHttpClient();
-                String url = Url.getRegisterUrl();
+                String url = URLS2.getRegisterUrl();
                 System.out.println("url = " + url);
 
                 Date date = new Date();
