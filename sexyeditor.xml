@@ -2,7 +2,9 @@
   <component name="SexyEditor">
     <option name="configs">
       <list>
-        <BackgroundConfiguration />
+        <BackgroundConfiguration>
+          <option name="opacity" value="0.22" />
+        </BackgroundConfiguration>
       </list>
     </option>
   </component>
