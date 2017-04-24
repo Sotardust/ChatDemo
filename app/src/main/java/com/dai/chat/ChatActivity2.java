@@ -15,6 +15,7 @@ import com.dai.R;
 import com.dai.bean.Message;
 import com.dai.bean.ReceivedMessage2;
 import com.dai.bean.SendMessage2;
+import com.dai.login.LoginActivity;
 import com.dai.login.RegisterActivity;
 import com.dai.util.ChatDataObserver;
 import com.dai.util.SimpleTextWatcher;
@@ -22,6 +23,7 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/4/16 0016.
@@ -33,6 +35,7 @@ public class ChatActivity2 extends BaseActivity implements ChatDataObserver {
     private ListView listView;
     private EditText input;
     private int number = 0;
+    private List<Message> messages;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,7 +57,7 @@ public class ChatActivity2 extends BaseActivity implements ChatDataObserver {
                 RegisterActivity.setButtonColor(s.toString(), send);
             }
         });
-        ArrayList<Message> messages = new ArrayList<>();
+        messages = new ArrayList<>();
         messageAdapter = new ChatMessageAdapter(getApplicationContext(), messages);
         listView.setAdapter(messageAdapter);
 
@@ -69,12 +72,13 @@ public class ChatActivity2 extends BaseActivity implements ChatDataObserver {
                 Date date = new Date();
                 message.setDate(date);
                 message.setMessage(input.getText().toString());
-                messageAdapter.setMessages(message);
+                messages.add(message);
+                messageAdapter.setMessages(messages);
+                listView.setSelection(messageAdapter.getCount());
 
                 SendMessage2 sendMessage = new SendMessage2();
-                long clientTime = date.getTime();
                 sendMessage.setRoomId("6666");
-                sendMessage.setUserId("xiaoming");
+                sendMessage.setUserId(LoginActivity.getUserId());
                 sendMessage.setMessage(input.getText().toString());
                 sendMessage.setTimeStamp(date.getTime());
                 getChatWebSocketListener().sendMessage(sendMessage.toString());
@@ -86,18 +90,24 @@ public class ChatActivity2 extends BaseActivity implements ChatDataObserver {
     public void onTextMessage(String string) {
         Gson gson = new Gson();
         ReceivedMessage2 receivedMessage = gson.fromJson(string, ReceivedMessage2.class);
-        Message message = new Message();
-        message.setHeadIcon(R.mipmap.ic_launcher);
-        if (number % 2 == 0) {
-            message.setComing(false);
-        } else {
-            message.setComing(true);
+        if (LoginActivity.getUserId().equals(receivedMessage.getUserId())) {
+            return;
         }
+        final Message message = new Message();
+        message.setHeadIcon(R.mipmap.ic_launcher);
+        message.setComing(true);
         message.setName("小王");
         Date date = new Date();
         message.setDate(date);
         message.setMessage(receivedMessage.getMessage());
-        messageAdapter.setMessages(message);
+        messages.add(message);
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                messageAdapter.setMessages(messages);
+                listView.setSelection(messageAdapter.getCount());
+            }
+        });
     }
 
     @Override

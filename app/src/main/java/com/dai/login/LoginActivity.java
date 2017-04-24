@@ -50,6 +50,8 @@ public class LoginActivity extends BaseActivity implements ChatDataObserver {
     private static WebSocket webSocket;
     private Handler handler;
 
+    private static String userId = null;
+
     public static WebSocketListener getWebSocketListener() {
         return webSocketListener;
     }
@@ -72,6 +74,10 @@ public class LoginActivity extends BaseActivity implements ChatDataObserver {
 
     public static WebSocket getWebSocket() {
         return webSocket;
+    }
+
+    public static String getUserId() {
+        return userId;
     }
 
     private void bindView() {
@@ -153,6 +159,7 @@ public class LoginActivity extends BaseActivity implements ChatDataObserver {
                             int success = jsonObject.getInt("success");
                             String error = jsonObject.getString("error");
                             if (success == 1) {
+                                userId = username;
                                 pullDataJava();
                                 Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
                                 startActivity(intent);
