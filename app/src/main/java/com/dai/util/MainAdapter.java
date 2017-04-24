@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.dai.R;
 import com.dai.bean.ChatMessage;
-import com.dai.chat.ChatActivity;
+import com.dai.chat.ChatActivity2;
 
 import java.util.ArrayList;
 
@@ -82,7 +82,7 @@ public class MainAdapter extends BaseAdapter {
     }
 
     protected void viewWorkflowDetail(String roomId, String content) {
-        Intent intent = new Intent(context, ChatActivity.class);
+        Intent intent = new Intent(context, ChatActivity2.class);
         intent.putExtra("roomId", roomId);
         intent.putExtra("content", content);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

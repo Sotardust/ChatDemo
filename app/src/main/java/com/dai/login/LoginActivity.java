@@ -14,10 +14,11 @@ import android.widget.Toast;
 
 import com.dai.BaseActivity;
 import com.dai.MainActivity;
+import com.dai.MainActivity2;
 import com.dai.R;
 import com.dai.util.ChatDataObserver;
 import com.dai.util.SimpleTextWatcher;
-import com.dai.util.Url;
+import com.dai.util.URLS2;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -123,7 +124,7 @@ public class LoginActivity extends BaseActivity implements ChatDataObserver {
             @Override
             public void subscribe(SingleEmitter<String> e) throws Exception {
                 OkHttpClient okHttpClient = new OkHttpClient();
-                String url = Url.getLoginUrl();
+                String url = URLS2.getLoginUrl();
                 RequestBody requestBody = new FormBody.Builder()
                         .add("username", username)
                         .add("password", password)
@@ -153,7 +154,7 @@ public class LoginActivity extends BaseActivity implements ChatDataObserver {
                             String error = jsonObject.getString("error");
                             if (success == 1) {
                                 pullDataJava();
-                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
                                 startActivity(intent);
                                 finish();
                             } else {
