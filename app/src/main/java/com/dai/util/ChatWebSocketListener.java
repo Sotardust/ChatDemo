@@ -65,7 +65,7 @@ public class ChatWebSocketListener extends WebSocketListener {
         System.out.println("onClosing reason = " + reason);
     }
 
-    public static void sendMessage(String text) {
+    public void sendMessage(String text) {
         mWebSocket.send(text);
     }
 
