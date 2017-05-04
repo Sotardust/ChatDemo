@@ -126,10 +126,10 @@ public class LoginActivity extends BaseActivity implements ChatDataObserver {
     }
 
     private void login(final String username, final String password) {
+        final OkHttpClient okHttpClient = new OkHttpClient();
         Single.create(new SingleOnSubscribe<String>() {
             @Override
             public void subscribe(SingleEmitter<String> e) throws Exception {
-                OkHttpClient okHttpClient = new OkHttpClient();
                 String url = URLS2.getLoginUrl();
                 RequestBody requestBody = new FormBody.Builder()
                         .add("username", username)
@@ -199,7 +199,7 @@ public class LoginActivity extends BaseActivity implements ChatDataObserver {
     }
 
     private void pullDataJava() {
-        String url = "ws://10.0.3.2:8080/websocket";
+        String url = URLS2.getWebSocketUrl();
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(url)

@@ -142,15 +142,28 @@ public class RegisterActivity2 extends BaseActivity {
                     @Override
                     public void onSuccess(String value) {
                         System.out.println(value);
+//                        try {
+//                            JSONObject jsonObject = new JSONObject(value);
+//                            int code = jsonObject.getInt("code");
+//                            String content = "注册失败";
+//                            if (code == 2000) {
+//                                content = "注册成功";
+//                            }
+//                            Toast.makeText(getBaseContext(), content, Toast.LENGTH_SHORT).show();
+//                            finish();
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
                         try {
                             JSONObject jsonObject = new JSONObject(value);
-                            int code = jsonObject.getInt("code");
+                            int success = jsonObject.getInt("success");
                             String content = "注册失败";
-                            if (code == 2000) {
+                            if (success == 1) {
                                 content = "注册成功";
+                                finish();
                             }
                             Toast.makeText(getBaseContext(), content, Toast.LENGTH_SHORT).show();
-                            finish();
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
