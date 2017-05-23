@@ -88,6 +88,7 @@ public class ChatActivity2 extends BaseActivity implements ChatDataObserver {
 
     @Override
     public void onTextMessage(String string) {
+        System.out.println("string = " + string);
         Gson gson = new Gson();
         ReceivedMessage2 receivedMessage = gson.fromJson(string, ReceivedMessage2.class);
         if (LoginActivity.getUserId().equals(receivedMessage.getUserId())) {

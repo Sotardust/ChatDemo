@@ -40,7 +40,6 @@ public class ChatActivity extends BaseActivity implements ChatDataObserver {
         setContentView(R.layout.activity_chat);
         Intent intent = getIntent();
         String roomId = intent.getStringExtra("roomId");
-        String content = intent.getStringExtra("content");
         listView = (ListView) findViewById(R.id.chat_list);
         TextView room = (TextView) findViewById(R.id.chat_room_id);
         input = (EditText) findViewById(R.id.chat_input);
