@@ -1,0 +1,5 @@
+<application>
+  <component name="GradleExperimentalSettings">
+    <option name="SKIP_SOURCE_GEN_ON_PROJECT_SYNC" value="true" />
+  </component>
+</application>
