@@ -156,14 +156,10 @@
       </value>
     </option>
     <option name="KOTLIN_CLASS">
-      <value>
-        <option name="FOREGROUND" value="a7e22e" />
-      </value>
+      <value />
     </option>
     <option name="KOTLIN_CONSTRUCTOR">
-      <value>
-        <option name="FOREGROUND" value="a7e22e" />
-      </value>
+      <value />
     </option>
     <option name="KOTLIN_DOC_COMMENT">
       <value>
@@ -178,7 +174,6 @@
     </option>
     <option name="KOTLIN_EXTENSION_FUNCTION_CALL">
       <value>
-        <option name="FOREGROUND" value="a7e22e" />
         <option name="FONT_TYPE" value="2" />
       </value>
     </option>
@@ -190,7 +185,7 @@
     </option>
     <option name="KOTLIN_FUNCTION_CALL">
       <value>
-        <option name="FOREGROUND" value="a7e22e" />
+        <option name="FOREGROUND" value="ff8602" />
       </value>
     </option>
     <option name="KOTLIN_INSTANCE_PROPERTY">
