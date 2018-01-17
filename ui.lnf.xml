@@ -1,6 +1,6 @@
 <application>
   <component name="UISettings">
-    <option name="FONT_FACE" value="Constantia" />
+    <option name="FONT_FACE" value="Microsoft YaHei" />
     <option name="FONT_SCALE" value="1.0" />
     <option name="FONT_SIZE" value="14" />
     <option name="HIDE_TOOL_STRIPES" value="false" />
